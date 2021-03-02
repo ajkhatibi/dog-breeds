@@ -1,43 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Text, Image, View, StyleSheet } from "react-native";
-import data from "./breeds.json";
-
+import useFetchDogList from "./useFetchDogList";
 interface Props {
   item: string;
   key: number;
 }
-interface ResponseInterface {
-  message: string;
-  status: string;
-}
+
 export default function RenderItemCard({ item, key }: Props) {
-  const [response, setResponse] = useState<ResponseInterface | null>(null);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(
-          `https://dog.ceo/api/breed/${item.toLocaleLowerCase()}/images/random`
-        );
-        const json = await res.json();
-        console.log("HI", json);
-        setResponse(json);
-      } catch (error) {
-        setError(error);
-      }
-    };
-    const doesItemExistInlist = data.dogs.find((element) => element === item);
-    if (doesItemExistInlist !== undefined) {
-      fetchData();
-    }
-  }, []);
+  const response = useFetchDogList(item);
+
   return (
     <View style={styles.container}>
       <Text key={key}>{item}</Text>
       <Image
         style={styles.image}
         resizeMode="contain"
-        source={{ uri: response?.message }}
+        source={{ uri: response.response?.message }}
       />
     </View>
   );
