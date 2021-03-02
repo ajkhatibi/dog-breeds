@@ -3,8 +3,9 @@ import React, { useState } from "react";
 import { StyleSheet, Text, SafeAreaView } from "react-native";
 import Autocomplete from "react-native-autocomplete-input";
 import data from "./breeds.json";
+import RenderItemCard from "./RenderItemCard";
 
-const findDogs = (query) => {
+const findDogs = (query: string) => {
   if (query === "") {
     return [];
   }
@@ -16,7 +17,8 @@ const findDogs = (query) => {
 export default function App() {
   const [query, setQuery] = useState("");
   const dogList = findDogs(query);
-  const comp = (a, b) => a.toLowerCase().trim() === b.toLowerCase().trim();
+  const comp = (a: string, b: string) =>
+    a.toLowerCase().trim() === b.toLowerCase().trim();
   return (
     <SafeAreaView style={styles.container}>
       <Autocomplete
@@ -24,7 +26,9 @@ export default function App() {
         data={dogList.length === 1 && comp(query, dogList[0]) ? [] : dogList}
         defaultValue={query}
         onChangeText={(text) => setQuery(text)}
-        renderItem={({ item, i }) => <Text key={i}>{item}</Text>}
+        renderItem={({ item, index }) => (
+          <RenderItemCard key={index} item={item} />
+        )}
       />
       <StatusBar style="auto" />
     </SafeAreaView>
