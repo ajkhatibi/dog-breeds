@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Text, Image, View, StyleSheet } from "react-native";
 import useFetchDogList from "./useFetchDogList";
 interface Props {
@@ -10,11 +10,11 @@ export default function RenderItemCard({ item, key }: Props) {
   const response = useFetchDogList(item);
 
   return (
-    <View style={styles.container}>
-      <Text key={key}>{item}</Text>
+    <View key={key} style={styles.container}>
+      <Text style={styles.text}>{item}</Text>
       <Image
         style={styles.image}
-        resizeMode="contain"
+        resizeMode="cover"
         source={{ uri: response.response?.message }}
       />
     </View>
@@ -32,5 +32,8 @@ const styles = StyleSheet.create({
   image: {
     width: 50,
     height: 50,
+  },
+  text: {
+    width: 100,
   },
 });
