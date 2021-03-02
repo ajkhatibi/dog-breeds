@@ -23,7 +23,11 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <Autocomplete
         placeholder="Start typing..."
-        data={dogList.length === 1 && comp(query, dogList[0]) ? [] : dogList}
+        data={
+          dogList.length === 1 && comp(query, dogList[0])
+            ? []
+            : dogList.slice(0, 4)
+        }
         defaultValue={query}
         onChangeText={(text) => setQuery(text)}
         renderItem={({ item, index }) => (
