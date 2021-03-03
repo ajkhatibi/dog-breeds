@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Image, View, StyleSheet } from "react-native";
+import { Text, Image, View, StyleSheet, ActivityIndicator } from "react-native";
 import useFetchDogList from "./useFetchDogList";
 interface Props {
   item: string;
@@ -12,11 +12,15 @@ export default function RenderItemCard({ item, key }: Props) {
   return (
     <View key={key} style={styles.container}>
       <Text style={styles.text}>{item}</Text>
-      <Image
-        style={styles.image}
-        resizeMode="cover"
-        source={{ uri: response.response?.message }}
-      />
+      {response.response ? (
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={{ uri: response.response?.message }}
+        />
+      ) : (
+        <ActivityIndicator />
+      )}
     </View>
   );
 }
