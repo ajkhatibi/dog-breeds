@@ -22,6 +22,9 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Autocomplete
+        autoCorrect={false}
+        autoCompleteType="off"
+        autoCapitalize="none"
         placeholder="Start typing..."
         data={
           dogList.length === 1 && comp(query, dogList[0])
