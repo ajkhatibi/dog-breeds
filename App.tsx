@@ -1,7 +1,8 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, SafeAreaView } from "react-native";
-import Autocomplete from "react-native-autocomplete-input";
+// import Autocomplete from "react-native-autocomplete-input";
+import AutoComplete from "./AutoComplete";
 import data from "./breeds.json";
 import RenderItemCard from "./RenderItemCard";
 
@@ -21,7 +22,7 @@ export default function App() {
     a.toLowerCase().trim() === b.toLowerCase().trim();
   return (
     <SafeAreaView style={styles.container}>
-      <Autocomplete
+      <AutoComplete
         autoCorrect={false}
         autoCompleteType="off"
         autoCapitalize="none"
@@ -31,7 +32,7 @@ export default function App() {
             ? []
             : dogList.slice(0, 4)
         }
-        defaultValue={query}
+        value={query}
         onChangeText={(text) => setQuery(text)}
         renderItem={({ item, index }) => (
           <RenderItemCard key={index} item={item} />
