@@ -3,14 +3,13 @@ import { Text, Image, View, StyleSheet, ActivityIndicator } from "react-native";
 import useFetchDogList from "./useFetchDogList";
 interface Props {
   item: string;
-  key: number;
 }
 
-export default function RenderItemCard({ item, key }: Props) {
+export default function RenderItemCard({ item }: Props) {
   const response = useFetchDogList(item);
 
   return (
-    <View key={key} style={styles.container}>
+    <View key={item} style={styles.container}>
       <Text style={styles.text}>{item}</Text>
       {response.response ? (
         <Image

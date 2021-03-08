@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, SafeAreaView } from "react-native";
-// import Autocomplete from "react-native-autocomplete-input";
+import { StyleSheet, SafeAreaView, View } from "react-native";
 import AutoComplete from "./AutoComplete";
 import data from "./breeds.json";
 import RenderItemCard from "./RenderItemCard";
@@ -34,9 +33,9 @@ export default function App() {
         }
         value={query}
         onChangeText={(text) => setQuery(text)}
-        renderItem={({ item, index }) => (
-          <RenderItemCard key={index} item={item} />
-        )}
+        renderItem={({ item, index }) => {
+          return <RenderItemCard item={item} />;
+        }}
       />
       <StatusBar style="auto" />
     </SafeAreaView>

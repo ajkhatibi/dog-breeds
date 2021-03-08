@@ -41,18 +41,18 @@ export default function AutoComplete({
   data,
   renderItem,
 }: Props) {
-  console.log("value: ", value);
   return (
     <View style={styles.container}>
       <View style={styles.textInputContainer}>
         <TextInput
+          autoFocus
           autoCorrect={autoCorrect}
           autoCompleteType={autoCompleteType}
           autoCapitalize={autoCapitalize}
           value={value}
           onChangeText={onChangeText}
           placeholder={placeholder}
-          style={{ height: 50 }}
+          style={styles.input}
         />
       </View>
       {value ? (
@@ -87,5 +87,8 @@ const styles = StyleSheet.create({
     left: 0,
     position: "absolute",
     right: 0,
+  },
+  input: {
+    height: 45,
   },
 });
